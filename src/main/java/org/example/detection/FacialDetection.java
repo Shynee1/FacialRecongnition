@@ -1,14 +1,16 @@
 package org.example.detection;
 
 import org.example.utils.Constants;
+import org.example.utils.Utils;
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
 public class FacialDetection {
 
-    private CascadeClassifier cc;
+    private final CascadeClassifier cc;
     private Mat currentFrame;
+    private Rect previousRect;
 
     public FacialDetection(){
         cc = new CascadeClassifier(Constants.CASCADE_FILEPATH);
@@ -28,20 +30,22 @@ public class FacialDetection {
 
         //Perform detection
         MatOfRect faces = new MatOfRect();
-        cc.detectMultiScale(frame, faces, Constants.SCALE,10, 0 , new Size(1, 1), new Size(75, 75));
+        cc.detectMultiScale(frame, faces, Constants.SCALE,10, 0 , new Size(25, 25), new Size(150, 150));
 
         if (faces.toArray().length == 0) return false;
 
-        drawDetection(image, faces.toArray(), Constants.COLOR);
+        if (previousRect == null) previousRect = faces.toArray()[0];
+
+        Rect currentRect = Utils.calculateLeastDistance(faces.toArray(), previousRect);
+
+        drawDetection(image, currentRect, Constants.COLOR);
         currentFrame = image;
 
         return true;
     }
 
-    public void drawDetection(Mat image, Rect[] rectangles, Scalar color){
-        for (Rect rectangle : rectangles) {
-            Imgproc.rectangle(image, new Point(rectangle.x, rectangle.y), new Point(rectangle.x + rectangle.width, rectangle.y + rectangle.height), color, 2);
-        }
+    public void drawDetection(Mat image, Rect rectangle, Scalar color){
+        Imgproc.rectangle(image, new Point(rectangle.x, rectangle.y), new Point(rectangle.x + rectangle.width, rectangle.y + rectangle.height), color, 2);
     }
 
     public Mat getCurrentFrame(){

@@ -2,19 +2,17 @@ package org.example.frontend;
 
 import org.example.detection.BodyDetection;
 import org.example.detection.FacialDetection;
-import org.example.utils.Constants;
 import org.example.utils.Utils;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
-import static org.example.utils.Constants.*;
+import static org.example.utils.Constants.SCREEN_HEIGHT;
+import static org.example.utils.Constants.SCREEN_WIDTH;
 
 public class Window extends JFrame implements Runnable{
 
@@ -24,8 +22,8 @@ public class Window extends JFrame implements Runnable{
     private BufferedImage currentFrame;
     private Graphics windowGraphics;
     private VideoCapture capture;
-    private FacialDetection facialDetection;
-    private BodyDetection bodyDetection;
+    private final FacialDetection facialDetection;
+    private final BodyDetection bodyDetection;
 
     public Window(){
         this.setTitle("Output");
@@ -59,8 +57,8 @@ public class Window extends JFrame implements Runnable{
         if (!capture.read(frame)) stopCamera();
 
         Mat currentMat;
-        //if (facialDetection.detectFace(frame)) currentMat = facialDetection.getCurrentFrame();
-        if (bodyDetection.detectBody(frame)) currentMat = bodyDetection.getCurrentFrame();
+        if (facialDetection.detectFace(frame)) currentMat = facialDetection.getCurrentFrame();
+        else if (bodyDetection.detectBody(frame)) currentMat = bodyDetection.getCurrentFrame();
         else currentMat = frame;
 
         try {
@@ -75,7 +73,7 @@ public class Window extends JFrame implements Runnable{
 
     private void startCamera(){
         if (!isRunning) return;
-        capture = new VideoCapture(0);
+        capture = new VideoCapture(1);
 
         if (!capture.isOpened()) throw new RuntimeException("Could not open capture");
 
