@@ -1,8 +1,8 @@
-package org.example.frontend;
+package org.shynee.frontend;
 
-import org.example.detection.BodyDetection;
-import org.example.detection.FacialDetection;
-import org.example.utils.Utils;
+import org.shynee.detection.BodyDetection;
+import org.shynee.detection.FacialDetection;
+import org.shynee.utils.Utils;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 
@@ -11,8 +11,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import static org.example.utils.Constants.SCREEN_HEIGHT;
-import static org.example.utils.Constants.SCREEN_WIDTH;
+import static org.shynee.utils.Constants.SCREEN_HEIGHT;
+import static org.shynee.utils.Constants.SCREEN_WIDTH;
 
 public class Window extends JFrame implements Runnable{
 

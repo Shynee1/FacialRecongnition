@@ -1,15 +1,11 @@
-package org.example.detection;
+package org.shynee.detection;
 
-import org.example.utils.Constants;
 import org.opencv.core.*;
 import org.opencv.core.Point;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.HOGDescriptor;
 
-import java.awt.*;
-import java.util.Arrays;
-
-import static org.example.utils.Constants.*;
+import static org.shynee.utils.Constants.*;
 
 public class BodyDetection {
 

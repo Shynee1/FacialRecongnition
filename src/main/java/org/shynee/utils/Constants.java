@@ -1,4 +1,4 @@
-package org.example.utils;
+package org.shynee.utils;
 
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;

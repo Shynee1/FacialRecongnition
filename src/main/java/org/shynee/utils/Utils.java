@@ -1,4 +1,4 @@
-package org.example.utils;
+package org.shynee.utils;
 
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;

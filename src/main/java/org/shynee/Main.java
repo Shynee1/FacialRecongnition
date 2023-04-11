@@ -1,6 +1,6 @@
-package org.example;
+package org.shynee;
 
-import org.example.frontend.Window;
+import org.shynee.frontend.Window;
 import org.opencv.core.Core;
 
 public class Main {

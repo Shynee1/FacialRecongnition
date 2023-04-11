@@ -1,7 +1,7 @@
-package org.example.detection;
+package org.shynee.detection;
 
-import org.example.utils.Constants;
-import org.example.utils.Utils;
+import org.shynee.utils.Constants;
+import org.shynee.utils.Utils;
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
@@ -30,7 +30,7 @@ public class FacialDetection {
 
         //Perform detection
         MatOfRect faces = new MatOfRect();
-        cc.detectMultiScale(frame, faces, Constants.SCALE,10, 0 , new Size(25, 25), new Size(150, 150));
+        cc.detectMultiScale(frame, faces, Constants.SCALE,6, 0 , new Size(25, 25), new Size(150, 150));
 
         if (faces.toArray().length == 0) return false;
 
